@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LookersHub - Coming Soon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background particles -->
+  <canvas id="bg"></canvas>
+  
+  <!-- Main content -->
+  <div class="container">
+    <img src="lookershub_logo.png" alt="LookersHub Logo" class="logo" id="logo">
+    <h1>Coming Soon</h1>
+    <p>We're crafting an unparalleled viewing experience just for you. Get ready! 🚀</p>
+
+    <!-- Countdown Timer -->
+    <div id="countdown">
+      <span id="days">00</span> Days 
+      <span id="hours">00</span> Hours 
+      <span id="minutes">00</span> Minutes 
+      <span id="seconds">00</span> Seconds
+    </div>
+
+    <!-- Email Form -->
+    <form class="subscribe-form" id="emailForm">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Notify Me</button>
+    </form>
+  </div>
+
+  <!-- Game Modal -->
+  <div id="gameModal" class="game-modal">
+    <div class="game-modal-content">
+      <span class="close-game">&times;</span>
+      <div class="game-header">
+        <h2>🎮 لعبة XO التفاعلية</h2>
+        <div class="game-stats">
+          <div class="stat">
+            <span class="stat-label">X</span>
+            <span class="stat-value" id="scoreX">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">تعادل</span>
+            <span class="stat-value" id="scoreDraw">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">O</span>
+            <span class="stat-value" id="scoreO">0</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="game-board-container">
+        <div class="game-board" id="gameBoard">
+          <div class="cell" data-index="0"></div>
+          <div class="cell" data-index="1"></div>
+          <div class="cell" data-index="2"></div>
+          <div class="cell" data-index="3"></div>
+          <div class="cell" data-index="4"></div>
+          <div class="cell" data-index="5"></div>
+          <div class="cell" data-index="6"></div>
+          <div class="cell" data-index="7"></div>
+          <div class="cell" data-index="8"></div>
+        </div>
+        <div class="winning-line" id="winningLine"></div>
+      </div>
+      
+      <div class="game-controls">
+        <p id="gameStatus" class="game-status">دور اللاعب <span class="player-symbol">X</span></p>
+        <div class="control-buttons">
+          <button id="resetGame" class="game-btn reset-btn">🔄 إعادة</button>
+          <button id="newGame" class="game-btn new-btn">🎯 لعبة جديدة</button>
+          <button id="soundToggle" class="game-btn sound-btn">🔊 صوت</button>
+        </div>
+      </div>
+      
+      <!-- Particle effects container -->
+      <div id="particles" class="particles-container"></div>
+    </div>
+  </div>
+
+  <!-- Music -->
+  <!-- <audio id="bgMusic" src="your-music.mp3" loop></audio> -->
+
+  <script src="script.js"></script>
+</body>
+</html>

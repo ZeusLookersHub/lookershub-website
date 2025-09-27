@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LookersHub - Coming Soon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+        
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9));
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            color: #FFD700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            margin: 20px 0;
+        }
+        
+        p {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+        }
+        
+        .game-modal-content {
+            background: #1a1a1a;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border: 2px solid #FFD700;
+            position: relative;
+        }
+        
+        .close-game {
+            color: #FFD700;
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 5px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+        
+        .cell {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #FFD700;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #FFD700;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        .cell:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .cell.taken {
+            cursor: not-allowed;
+            background: rgba(255, 215, 0, 0.3);
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        
+        button:hover {
+            background: #FFC300;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="lookershub_logo.png" alt="LookersHub Logo" class="logo" id="logo">
+        <h1>Coming Soon</h1>
+        <p>We're crafting an unparalleled viewing experience just for you. Get ready! 🚀</p>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="game-modal">
+        <div class="game-modal-content">
+            <span class="close-game">&times;</span>
+            <h2>لعبة XO</h2>
+            <div class="game-board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+            <p id="gameStatus">دور اللاعب X</p>
+            <button id="resetGame">إعادة</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple XO Game
+        const gameModal = document.getElementById("gameModal");
+        const logo = document.getElementById("logo");
+        const closeGame = document.querySelector(".close-game");
+        const gameCells = document.querySelectorAll(".cell");
+        const gameStatus = document.getElementById("gameStatus");
+        const resetGameBtn = document.getElementById("resetGame");
+
+        let currentPlayer = "X";
+        let gameBoard = ["", "", "", "", "", "", "", "", ""];
+        let gameRunning = true;
+
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        // Open game when logo is clicked
+        logo.addEventListener("click", () => {
+            gameModal.style.display = "block";
+            startGame();
+        });
+
+        // Close game
+        closeGame.addEventListener("click", () => {
+            gameModal.style.display = "none";
+        });
+
+        // Close when clicking outside
+        window.addEventListener("click", (event) => {
+            if (event.target === gameModal) {
+                gameModal.style.display = "none";
+            }
+        });
+
+        function startGame() {
+            gameCells.forEach(cell => cell.addEventListener("click", cellClicked));
+            resetGameBtn.addEventListener("click", resetGame);
+            gameStatus.textContent = `دور اللاعب ${currentPlayer}`;
+        }
+
+        function cellClicked() {
+            const index = this.dataset.index;
+            if (gameBoard[index] !== "" || !gameRunning) return;
+
+            gameBoard[index] = currentPlayer;
+            this.textContent = currentPlayer;
+            this.classList.add("taken");
+            checkWinner();
+        }
+
+        function checkWinner() {
+            let roundWon = false;
+            for (let i = 0; i < winPatterns.length; i++) {
+                const [a, b, c] = winPatterns[i];
+                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                gameStatus.textContent = `🎉 اللاعب ${currentPlayer} فاز!`;
+                gameRunning = false;
+            } else if (!gameBoard.includes("")) {
+                gameStatus.textContent = "🤝 تعادل!";
+                gameRunning = false;
+            } else {
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                gameStatus.textContent = `دور اللاعب ${currentPlayer}`;
+            }
+        }
+
+        function resetGame() {
+            currentPlayer = "X";
+            gameBoard = ["", "", "", "", "", "", "", "", ""];
+            gameRunning = true;
+            gameStatus.textContent = `دور اللاعب ${currentPlayer}`;
+            gameCells.forEach(cell => {
+                cell.textContent = "";
+                cell.classList.remove("taken");
+            });
+        }
+    </script>
+</body>
+</html>
+

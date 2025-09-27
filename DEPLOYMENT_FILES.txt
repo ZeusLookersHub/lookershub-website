@@ -1,0 +1,59 @@
+LOOKERSHUB WEBSITE - DEPLOYMENT FILES
+=====================================
+
+ESSENTIAL FILES TO UPLOAD TO YOUR WEBSITE:
+==========================================
+
+1. index.html          (3,116 bytes) - Main website with interactive XO game
+2. script.js           (10,899 bytes) - Enhanced JavaScript with animations & sound
+3. style.css           (10,148 bytes) - Complete styling with animations
+4. lookershub_logo.png (117,732 bytes) - Your logo image
+5. README.md           (1,295 bytes) - Project documentation
+
+OPTIONAL FILES (not needed for live site):
+==========================================
+- test.html            - Testing file
+- test_game.html       - Game testing file  
+- run_server.bat       - Local server script
+- start_server.bat     - Local server script
+- .vscode/             - VS Code settings
+
+DEPLOYMENT INSTRUCTIONS:
+========================
+
+1. UPLOAD THESE 5 FILES to your website's root directory:
+   - index.html
+   - script.js  
+   - style.css
+   - lookershub_logo.png
+   - README.md (optional)
+
+2. MAKE SURE all files are in the SAME DIRECTORY
+
+3. TEST your website by visiting your domain
+
+4. CLICK the logo to test the interactive XO game
+
+FEATURES INCLUDED:
+=================
+✅ Beautiful "Coming Soon" landing page
+✅ Animated particle background
+✅ Countdown timer
+✅ Email subscription form
+✅ Interactive XO game (click logo to play)
+✅ Sound effects and animations
+✅ Score tracking
+✅ Mobile responsive design
+✅ Professional golden theme
+
+TECHNICAL NOTES:
+================
+- Pure HTML/CSS/JavaScript (no server required)
+- Uses Web Audio API for sound effects
+- Local Storage for score persistence
+- Responsive design for all devices
+- Works on all modern browsers
+- HTTPS compatible
+
+Your website is ready for deployment! 🚀
+
