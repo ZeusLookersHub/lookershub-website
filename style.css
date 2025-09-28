@@ -32,10 +32,11 @@ canvas#bg {
 
 /* Logo */
 .logo {
-  width: 80%;
-  max-width: 350px;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
+  width: 90%;
+  max-width: 500px;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8));
+  animation: heartbeat 2s ease-in-out infinite;
 }
 
 /* Headings and text */
@@ -489,41 +490,336 @@ p {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/* Mobile First - Small screens */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+    top: 20%;
+  }
+  
+  .logo {
+    width: 95%;
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin: 15px 0;
+  }
+  
+  p {
+    font-size: 1.1em;
+    line-height: 1.4;
+    margin: 15px 0;
+  }
+  
+  #countdown {
+    font-size: 1.2em;
+    margin: 15px 0;
+  }
+  
+  .subscribe-form {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .subscribe-form input {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .subscribe-form button {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  /* Game Modal Mobile */
   .game-modal-content {
-    margin: 5% auto;
+    margin: 2% auto;
     width: 98%;
-    padding: 20px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .game-header h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .game-stats {
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .stat {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 5px;
   }
   
   .game-board {
-    grid-template-columns: repeat(3, 70px);
-    gap: 6px;
+    grid-template-columns: repeat(3, 60px);
+    gap: 4px;
+    margin: 15px auto;
+    padding: 8px;
   }
   
   .cell {
-    width: 70px;
-    height: 70px;
-    font-size: 2em;
+    width: 60px;
+    height: 60px;
+    font-size: 1.8em;
+  }
+  
+  .game-status {
+    font-size: 1.1em;
+    margin: 10px 0;
   }
   
   .control-buttons {
     flex-direction: column;
-    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
   }
   
   .game-btn {
-    width: 200px;
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
   }
 }
 
-/* Logo click effect */
+/* Tablet screens */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    padding: 20px;
+    top: 25%;
+  }
+  
+  .logo {
+    width: 85%;
+    max-width: 400px;
+    margin-bottom: 25px;
+  }
+  
+  h1 {
+    font-size: 3em;
+  }
+  
+  p {
+    font-size: 1.2em;
+  }
+  
+  #countdown {
+    font-size: 1.3em;
+  }
+  
+  .game-modal-content {
+    margin: 3% auto;
+    width: 95%;
+    padding: 25px;
+  }
+  
+  .game-board {
+    grid-template-columns: repeat(3, 75px);
+    gap: 6px;
+  }
+  
+  .cell {
+    width: 75px;
+    height: 75px;
+    font-size: 2.2em;
+  }
+  
+  .control-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .game-btn {
+    width: 150px;
+  }
+}
+
+/* Desktop screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 25px;
+    top: 30%;
+  }
+  
+  .logo {
+    width: 80%;
+    max-width: 450px;
+  }
+  
+  h1 {
+    font-size: 3.2em;
+  }
+  
+  .game-modal-content {
+    margin: 4% auto;
+    width: 90%;
+    max-width: 550px;
+  }
+  
+  .game-board {
+    grid-template-columns: repeat(3, 85px);
+    gap: 7px;
+  }
+  
+  .cell {
+    width: 85px;
+    height: 85px;
+    font-size: 2.3em;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1025px) {
+  .container {
+    padding: 30px;
+    top: 30%;
+  }
+  
+  .logo {
+    width: 90%;
+    max-width: 500px;
+  }
+  
+  h1 {
+    font-size: 3.5em;
+  }
+  
+  .game-modal-content {
+    margin: 5% auto;
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  .game-board {
+    grid-template-columns: repeat(3, 90px);
+    gap: 8px;
+  }
+  
+  .cell {
+    width: 90px;
+    height: 90px;
+    font-size: 2.5em;
+  }
+}
+
+/* Landscape mobile orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    top: 15%;
+    padding: 10px;
+  }
+  
+  .logo {
+    width: 60%;
+    max-width: 250px;
+    margin-bottom: 15px;
+  }
+  
+  h1 {
+    font-size: 2.2em;
+    margin: 10px 0;
+  }
+  
+  p {
+    font-size: 1em;
+    margin: 10px 0;
+  }
+  
+  #countdown {
+    font-size: 1.1em;
+    margin: 10px 0;
+  }
+  
+  .game-modal-content {
+    margin: 1% auto;
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .game-board {
+    grid-template-columns: repeat(3, 50px);
+    gap: 3px;
+  }
+  
+  .cell {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .cell {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .game-btn {
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+  
+  .close-game {
+    font-size: 32px;
+    padding: 10px;
+  }
+}
+
+/* Logo click effect and heartbeat animation */
 .logo {
   cursor: pointer;
   transition: all 0.3s ease;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8));
+  }
+  25% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 35px rgba(255, 215, 0, 1));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9));
+  }
+  75% {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8));
+  }
 }
 
 .logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9));
+  animation-play-state: paused;
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 50px rgba(255, 215, 0, 1));
 }
