@@ -380,3 +380,9 @@ function loadScores() {
     updateScores();
   }
 }
+window.addEventListener("load", function() {
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.querySelector(".container").style.display = "block"; // يظهر الصفحة
+  }, 2000); // بعد ثانيتين من التجميع
+});
